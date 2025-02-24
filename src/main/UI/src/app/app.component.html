@@ -1,6 +1,4 @@
-
-
-<header id="intro" style="display: block;">
+<header id="intro" style="display: block;" xmlns:th="http://www.w3.org/1999/xhtml">
   <article class="fullheight" style="height: 568px;">
     <div class="hgroup">
       <h1>Landon Hotel</h1>
@@ -15,6 +13,7 @@
     <nav id="nav" style="position: relative; top: 0; left: 0; bottom: auto; right: auto; width: 100%;">
       <div class="navbar">
         <div class="brand"><a href="/#welcome">Landon <span>Hotel</span></a></div>
+        <p id="welcomeMessage">{{ welcomeMessage }}</p>
       </div><!-- navbar -->
     </nav>
   </div>
@@ -23,7 +22,7 @@
   <div class="scene" id="welcome">
     <article class="content">
 
- 
+
 
       <div class="row">
         <div class=""col-12>
@@ -58,7 +57,7 @@
               </div>
               </form>
 
-        
+
         </div>
       </div>
 

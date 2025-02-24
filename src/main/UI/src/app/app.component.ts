@@ -27,12 +27,14 @@ export class AppComponent implements OnInit{
   request!:ReserveRoomRequest;
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
+  welcomeMessage:string = '';
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
         checkin: new FormControl(' '),
         checkout: new FormControl(' ')
       });
+      this.fetchWelcomeMessage();
 
  //     this.rooms=ROOMS;
 
@@ -83,7 +85,15 @@ export class AppComponent implements OnInit{
        return this.httpClient.get(this.baseURL + '/room/reservation/v1?checkin='+ this.currentCheckInVal + '&checkout='+this.currentCheckOutVal, {responseType: 'json'});
     }
 
+  private fetchWelcomeMessage() {
+    this.httpClient.get<{message:string}>(this.baseURL + '/api/welcome')
+      .subscribe(response => {
+      this.welcomeMessage = response.message;
+    }, error => {
+      console.error('Error fetching welcome message:', error);
+    });
   }
+}
 
 
 

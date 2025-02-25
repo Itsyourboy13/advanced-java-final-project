@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
   currentCheckInVal!:string;
   currentCheckOutVal!:string;
   welcomeMessage:string = '';
+  nextPresentation:string = '';
 
     ngOnInit(){
       this.roomsearch= new FormGroup({
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit{
         checkout: new FormControl(' ')
       });
       this.fetchWelcomeMessage();
+      this.fetchNextPresentation();
 
  //     this.rooms=ROOMS;
 
@@ -92,6 +94,16 @@ export class AppComponent implements OnInit{
     }, error => {
       console.error('Error fetching welcome message:', error);
     });
+  }
+
+  private fetchNextPresentation() {
+
+    this.httpClient.get<{message:string}>(this.baseURL + '/api/presentation')
+      .subscribe(response => {
+        this.nextPresentation = response.message;
+      }, error => {
+        console.error('Error fetching welcome message:', error);
+      });
   }
 }
 

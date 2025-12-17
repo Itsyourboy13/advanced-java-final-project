@@ -20,7 +20,9 @@ time, mark, audio, video {
   font-size: 100%;
   vertical-align: baseline;
 }
-
+#welcomeMessage{
+  color: white;
+}
 /* line 22, ../../../../../.rvm/gems/ruby-2.1.2/gems/compass-core-1.0.0.rc.1/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;

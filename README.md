@@ -1,92 +1,85 @@
-<strong> **DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. ** </strong>
+# Landon Hotel Scheduling App – Advanced Java Final Project
 
-# WESTERN GOVERNORS UNIVERSITY 
-## D387 – ADVANCED JAVA
-Welcome to Advanced Java! This is an opportunity for students to write multithreaded object-oriented code using Java frameworks and determine how to deploy software applications using cloud services.
+This repository contains my final project for **D387 – Advanced Java** at Western Governors University.
 
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-## BASIC INSTRUCTIONS
-For this assessment, you will modify a Spring application with a Java back end and an Angular front end to include multithreaded language translation, a message at different time zones, and currency exchange. Then, build a Docker image of the current multithreaded Spring application and containerize it using the supporting documents provided in this task.
+The application is a **full-stack Spring Boot (Java backend) + Angular (frontend)** hotel scheduling/reservation system, enhanced to demonstrate advanced Java concepts including:
 
+- Multithreading for internationalization (i18n)
+- Resource bundles for localization (English & French welcome messages)
+- Currency formatting (USD, CAD, EUR)
+- Custom time zone conversion (ET, MT, UTC)
 
-## SUPPLEMENTAL RESOURCES 
-1.	How to clone a project to IntelliJ using Git?
+The project also includes **Docker containerization** of the entire application.
 
-> Ensure that you have Git installed on your system and that IntelliJ is installed using [Toolbox](https://www.jetbrains.com/toolbox-app/). Make sure that you are using version 2022.3.2. Once this has been confirmed, click the clone button and use the 'IntelliJ IDEA (HTTPS)' button. This will open IntelliJ with a prompt to clone the proejct. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.  
+## Features Demonstrated
 
-2. How to create a branch and start Development?
+### Backend (Spring Boot + Java)
+- **Multithreaded welcome messages**: English and French messages displayed concurrently using separate threads and resource bundles
+- **Time zone conversion**: Custom Java method to convert and display times in Eastern Time (ET), Mountain Time (MT), and UTC
+- REST API serving reservation data
 
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
+### Frontend (Angular)
+- Displays welcome messages in both English and French
+- Shows reservation prices formatted in USD, CAD, and EUR (on separate lines)
+- Displays live presentation time in ET, MT, and UTC
 
-- IntelliJ method
-> In IntelliJ, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
+### DevOps
+- Dockerfile that builds a container image for the Spring Boot application
+- Successfully tested running in a Docker container
 
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
+## How to Run Locally
 
+### Prerequisites
+- Java 17
+- Maven
+- Docker (optional, for container run)
 
-# BYN2 — BYN2 Task 1: Deploying a Modified Multithreaded Spring Application to the Cloud
-## A.  Create your subgroup and project in GitLab using the provided web link and the "GitLab How-To" web link by doing the following:
+### Steps
 
-•   Clone the project to the IDE.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Itsyourboy13/landon-hotel-advanced-java.git
+   cd landon-hotel-advanced-java
+   
+2. **Build and run with Maven**
+   ```bash
+   mvn spring-boot:run
+- Application runs on http://localhost:8080
+- Frontend is served from the backend (static resources)
 
-•   Commit with a message and push when you complete each requirement listed in parts B1, B2, B3, and C1.
+3. **Open in browser**
+- Go to http://localhost:8080
+- You will see:
+  - Welcome messages in English and French (displayed via multithreading)
+  - Reservation Prices in USD, CAD, and EUR after you have selected check in and check out dates and have submitted those 
+  - Live presentation time in ET, MT, and UTC
 
+## Run with Docker
+The existing Dockerfile is already in the project and works perfectly!
 
-Note: You may commit and push whenever you want to back up your changes, even if a requirement is not yet complete.
+### Build and run:
 
+   ```bash
+   # Build the JAR first (if not already built)
+   mvn clean package
+   
+   # Build the Docker image
+   docker build -t landon-hotel .
 
-•   Submit a copy of the GitLab repository URL in the "Comments to Evaluator" section when you submit this assessment.
+   # Run container
+   docker run -p 8080:8080 --name D387_landon_hotel landon-hotel
+   ```
+Then open http://localhost:8080
 
-•   Submit a copy of the repository branch history retrieved from your repository, which must include the commit messages and dates.
+## Skills Demonstrated
+- Multithreaded programming in Java
+- Internationalization and localization with resource bundles
+- Time zone handling with Java's Date/Time API
+- Full-stack development (Spring Boot + Angular)
+- Docker containerization and deployment preparation
 
-Note: Wait until you have completed all the following prompts before you create your copy of the repository branch history.
+## Academic Note
+This project was completed as a graded assessment for WGU D387 – Advanced Java. The starter code was provided by the course. All modifications for multithreading, localization, currency display, time zone conversion, and Docker were implemented by me.
 
-
-## B.  Modify the Landon Hotel scheduling application for localization and internationalization by doing the following:
-
-1.   Install the Landon Hotel scheduling application in your integrated development environment (IDE). Modify the Java classes of application to display a welcome message by doing the following:
-
-a.  Build resource bundles for both English and French (languages required by Canadian law). Include a welcome message in the language resource bundles.
-
-b.  Display the welcome message in both English and French by applying the resource bundles using a different thread for each language.
-
-
-Note: You may use Google Translate for the wording of your welcome message.
-
-
-2.  Modify the front end to display the price for a reservation in currency rates for U.S. dollars ($), Canadian dollars (C$), and euros (€) on different lines.
-
-
-Note: It is not necessary to convert the values of the prices.
-
-
-3.  Display the time for an online live presentation held at the Landon Hotel by doing the following:
-
-a.  Write a Java method to convert times between eastern time (ET), mountain time (MT), and coordinated universal time (UTC) zones.
-
-b.  Use the time zone conversion method from part B3a to display a message stating the time in all three times zones in hours and minutes for an online, live presentation held at the Landon Hotel. The times should be displayed as ET, MT, and UTC.
-
-
-## C.  Explain how you would deploy the Spring application with a Java back end and an Angular front end to cloud services and create a Dockerfile using the attached supporting document "How to Create a Docker Account" by doing the following:
-
-1.  Build the Dockerfile to create a single image that includes all code, including modifications made in parts B1 to B3. Commit and push the final Dockerfile to GitLab.
-
-2.  Test the Dockerfile by doing the following:
-
-•   Create a Docker image of the current multithreaded Spring application.
-
-•   Run the Docker image in a container and give the container a name that includes D387_[student ID].
-
-•   Submit a screenshot capture of the running application with evidence it is running in the container.
-
-3.  Describe how you would deploy the current multithreaded Spring application to the cloud. Include the name of the cloud service provider you would use.
-
-
-Note: Remember to commit and push your changes to GitLab.
-
-
-## D.  Demonstrate professional communication in the content and presentation of your submission.
+## Why This Project?
+This project showcases advanced Java concepts in a real-world context, including concurrent programming and internationalization — key skills for enterprise Java development.

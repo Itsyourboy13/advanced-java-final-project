@@ -1,5 +1,6 @@
 package edu.wgu.d387_sample_code.rest;
 
+import edu.wgu.d387_sample_code.convertor.TimeZoneConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.InputStream;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -45,6 +49,33 @@ public class WelcomeController {
 
         Map<String, String> response = new HashMap<>();
         response.put("message", result.toString());
+        return response;
+    }
+
+    @GetMapping("/presentation")
+    public Map<String, String> nextPresentation() {
+
+        // Current Date and time in UTC
+        ZonedDateTime utcNow = ZonedDateTime.now(ZoneId.of("UTC"));
+
+        // // Presentation date and time in UTC (10 days from now, at 7:30 PM)
+        ZonedDateTime presentationUtc = utcNow.plusDays(10).withHour(19).withMinute(30).withSecond(0).withNano(0);
+
+        String utcTime = presentationUtc.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String utcDate = utcNow.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String etTime = TimeZoneConverter.convertTime(utcTime, ZoneId.of("UTC"), ZoneId.of("America/New_York"));
+        String mtTime = TimeZoneConverter.convertTime(utcTime, ZoneId.of("UTC"), ZoneId.of("America/Denver"));
+
+        String presentation = "Join us for an online presentation held at the Landon Hotel on ";
+        presentation += utcDate;
+        presentation += " at " + utcTime + " UTC | ";
+        presentation += mtTime + " Mountain Time | ";
+        presentation += etTime + " Eastern Time!";
+
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", presentation);
+        System.out.println(response);
         return response;
     }
 

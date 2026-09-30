@@ -1,0 +1,3 @@
+One lock file per checked-out path lives here.
+Leave this directory in git even when it is otherwise empty
+(this README keeps the folder from disappearing).

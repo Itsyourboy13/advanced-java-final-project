@@ -1,0 +1,52 @@
+# ---------- Maven / Java ----------
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.log
+hs_err_pid*
+HELP.md
+
+# H2 database files (if the datasource URL is pointed inside the project)
+*.mv.db
+*.trace.db
+
+# ---------- Angular / Node (src/main/UI) ----------
+node_modules/
+dist/
+tmp/
+out-tsc/
+.angular/
+coverage/
+npm-debug.log*
+yarn-error.log*
+.sass-cache/
+testem.log
+
+# ---------- IDEs ----------
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ---------- OS files ----------
+.DS_Store
+._*
+Thumbs.db
